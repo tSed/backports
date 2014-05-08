@@ -29,7 +29,7 @@ KERNEL_CONFIG := $(KLIB_BUILD)/.config
 KERNEL_MAKEFILE := $(KLIB_BUILD)/Makefile
 CONFIG_MD5 := $(shell md5sum $(KERNEL_CONFIG) 2>/dev/null | sed 's/\s.*//')
 
-export KLIB KLIB_BUILD BACKPORT_PWD KMODDIR KMODPATH_ARG
+export KLIB KLIB_BUILD BACKPORT_PWD KMODDIR KMODPATH_ARG KROOT KVERSION
 
 # disable built-in rules for this file
 .SUFFIXES:
