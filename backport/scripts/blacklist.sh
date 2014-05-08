@@ -1,10 +1,11 @@
 #!/bin/bash
 
-BLACKLIST_CONF="/etc/modprobe.d/backports.conf"
-BLACKLIST_MAP=".blacklist.map"
-
 MODULE_DIR=$1
 MODULE_UPDATES=$2
+KROOT=$3
+
+BLACKLIST_CONF="$KROOT/etc/modprobe.d/backports.conf"
+BLACKLIST_MAP=".blacklist.map"
 
 if [[ ! -d $MODULE_DIR ]]; then
 	exit
