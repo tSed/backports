@@ -9,10 +9,11 @@ SHELL := /bin/bash
 BACKPORT_PWD := $(shell pwd)
 
 KMODDIR ?= updates
-ifneq ($(origin KLIB), undefined)
-KMODPATH_ARG := "INSTALL_MOD_PATH=$(KLIB)"
+ifneq ($(origin KROOT), undefined)
+KMODPATH_ARG := "INSTALL_MOD_PATH=$(KROOT)"
 else
 KLIB := /lib/modules/$(shell uname -r)/
+KROOT := /
 KMODPATH_ARG :=
 endif
 KLIB_BUILD ?= $(KLIB)/build/
