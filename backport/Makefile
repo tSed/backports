@@ -62,11 +62,17 @@ mrproper:
 	echo "/--------------"								;\
 	echo "| Your kernel headers are incomplete/not installed."			;\
 	echo "| Please install kernel headers, including a .config"			;\
-	echo "| file or use the KLIB/KLIB_BUILD make variables to"			;\
-	echo "| set the kernel to build against, e.g."					;\
-	echo "|   make KLIB=/lib/modules/3.1.7/"					;\
-	echo "| to compile/install for the installed kernel 3.1.7"			;\
-	echo "| (that isn't currently running.)"					;\
+	echo "| file or use the KROOT/KLIB_BUILD make variables to"			;\
+	echo "| set the kernel to build against, e.g.:"					;\
+	echo "| * to compile/install for the installed kernel 3.1.7"			;\
+	echo "|   (that isn't currently running.):"					;\
+	echo "|   $$ make KLIB_BUILD=/lib/modules/3.1.7/build"				;\
+	echo "| * to cross-compile/install for an arm target in /opt/arm-dev/rootfs:"	;\
+	echo "|   $$ make \\"								;\
+	echo "|        ARCH=arm	\\"							;\
+	echo "|        CROSS_COMPILE=/opt/ct-ng/arm-linux/bin/arm-linux- \\"		;\
+	echo "|        KROOT=/opt/arm-dev/rootfs \\"					;\
+	echo "|        KLIB_BUILD=/opt/arm-dev/linux"					;\
 	echo "\\--"									;\
 	false)
 	@set -e ; if [ "$$(cat .kernel_config_md5 2>/dev/null)" != "$(CONFIG_MD5)" ]	;\
