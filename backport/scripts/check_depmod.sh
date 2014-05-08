@@ -6,13 +6,14 @@
 
 # Seems Mandriva has an $DEPMOD_DIR but it doesn't have any files,
 # so lets deal with those distributions.
-DEPMOD_CONF="/etc/depmod.conf"
+DEPMOD_CMD="${1:-depmod}"
+KROOT="${2:-/}"
+DEPMOD_CONF="$KROOT/etc/depmod.conf"
 DEPMOD_CONF_TMP="$DEPMOD_CONF.backports.old"
-DEPMOD_DIR="/etc/depmod.d/"
+DEPMOD_DIR="$KROOT/etc/depmod.d/"
 BACKPORT_DEPMOD_FILE="backports.conf"
 GREP_REGEX_UPDATES="^[[:space:]]*search.*[[:space:]]updates\([[:space:]]\|$\)"
 GREP_REGEX_SEARCH="^[[:space:]]*search[[:space:]].\+$"
-DEPMOD_CMD="depmod"
 
 function add_compat_depmod_conf {
 	echo "NOTE: Your distribution lacks an $DEPMOD_DIR directory with "
