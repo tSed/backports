@@ -102,7 +102,7 @@ install: modules
 		$(KVERSION) \
 		"$(shell sed -n '/^CONFIG_HAVE_UNDERSCORE_SYMBOL_PREFIX=y/ s//_/p' \
 			$(KLIB_BUILD)/.config)"
-	@./scripts/update-initramfs.sh $(KLIB)
+	@test -n "$(CROSS_COMPILE)" || ./scripts/update-initramfs.sh $(KLIB)
 	@echo
 	@echo Your backported driver modules should be installed now.
 	@echo Reboot.
