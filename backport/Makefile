@@ -12,10 +12,18 @@ KMODDIR ?= updates
 ifneq ($(origin KROOT), undefined)
 KMODPATH_ARG := "INSTALL_MOD_PATH=$(KROOT)"
 else
-KLIB := /lib/modules/$(shell uname -r)/
 KROOT := /
 KMODPATH_ARG :=
 endif
+
+ifneq ($(origin KLIB_BUILD), undefined)
+KVERSION := $(shell $(MAKE) -C $(KLIB_BUILD) $(if $(ARCH),ARCH=$(ARCH)) \
+	--no-print-directory -s kernelrelease)
+else
+KVERSION := $(shell uname -r)
+endif
+
+KLIB := $(KROOT)/lib/modules/$(KVERSION)
 KLIB_BUILD ?= $(KLIB)/build/
 KERNEL_CONFIG := $(KLIB_BUILD)/.config
 KERNEL_MAKEFILE := $(KLIB_BUILD)/Makefile
