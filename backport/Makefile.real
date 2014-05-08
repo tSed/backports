@@ -97,7 +97,11 @@ install: modules
 	@./scripts/blacklist.sh $(KLIB)/ $(KLIB)/$(KMODDIR) $(KROOT)
 	@./scripts/compress_modules.sh $(KLIB)/$(KMODDIR)
 	@./scripts/check_depmod.sh $(DEPMOD) $(KROOT)
-	@$(DEPMOD) -a
+	@$(KMODPATH_ARGS) $(KLIB_BUILD)/scripts/depmod.sh \
+		$(DEPMOD) \
+		$(KVERSION) \
+		"$(shell sed -n '/^CONFIG_HAVE_UNDERSCORE_SYMBOL_PREFIX=y/ s//_/p' \
+			$(KLIB_BUILD)/.config)"
 	@./scripts/update-initramfs.sh $(KLIB)
 	@echo
 	@echo Your backported driver modules should be installed now.
